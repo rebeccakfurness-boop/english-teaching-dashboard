@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>English Grade 8 · Tutoring Dashboard</title>
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<div class="top-banner">
+  <div class="wrap">
+    <p class="eyebrow">Private Tutoring · Cambridge Lower Secondary</p>
+    <h1>English Grade 8 — Curriculum &amp; Lesson Dashboard</h1>
+    <p class="sub">Learner's Book 8 &amp; Workbook 8 (Cambridge Lower Secondary English), mapped to Selong Bay School's Academic Calendar 2026/27. Twice‑weekly sessions — Tuesdays &amp; Fridays, 30 minutes online — built to reinforce and stay in step with what's being taught in class.</p>
+    <div class="banner-meta">
+      <span class="pill">📘 School Year 2026/27</span>
+      <span class="pill">🗓️ Sessions: Tue &amp; Fri, 30 min</span>
+      <span class="pill">🎯 9 Units · 4 Terms</span>
+      <span class="pill">📍 Selong Bay School</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="callout" style="margin-bottom:34px;">
+    <strong>A note on sources</strong>
+    This dashboard is built from the two documents you supplied: the <em>Unit Overview &amp; Year Planner</em> (unit dates, texts, writing tasks, language focus — taken from the Learner's Book 8 contents page) and the school's <em>Academic Calendar 26/27</em>. You mentioned the full <strong>Workbook 8</strong> isn't in hand yet. Until it arrives, the four lessons below use original passages and exercises written to match each unit's exact reading type and language focus (e.g. a nature‑disaster narrative for Unit 1's "verb tenses for effect", rather than the actual "When the Mountains Roared" extract). Everything is tagged <span class="badge badge-planned" style="vertical-align:middle;">Placeholder text</span> where this applies — swap these for the authentic Learner's Book / Workbook pages the moment you have them, the surrounding activities and script won't need to change.
+  </div>
+
+  <h2 class="section-title">At a glance</h2>
+  <div class="grid-4">
+    <div class="card stat"><div class="num">9</div><div class="label">Learner's Book units</div></div>
+    <div class="card stat"><div class="num">4</div><div class="label">School terms</div></div>
+    <div class="card stat" id="stat-sessions"><div class="num">—</div><div class="label">Tue/Fri sessions, Aug–Jun</div></div>
+    <div class="card stat"><div class="num">4</div><div class="label">Lessons fully planned</div></div>
+  </div>
+
+  <h2 class="section-title">Up next</h2>
+  <p class="section-sub">The four sessions we're building out now — the last two of Unit 1 (consolidation before the unit closes) and the first two of Unit 2 (which starts exactly on schedule with the school's calendar).</p>
+
+  <div class="grid-4" id="focus-cards">
+    <!-- filled by JS from LESSON_PLANS below, but kept as static fallback -->
+  </div>
+
+  <div class="callout watch">
+    <strong>Heads‑up on 25 August</strong>
+    Tuesday 25 Aug 2026 is a public holiday at Selong Bay School (no classes that day). Your tutoring session can still go ahead as normal since it's outside school hours — but it's worth confirming with the family in case it's a travel day.
+  </div>
+
+  <h2 class="section-title">Full curriculum outline — all 9 units</h2>
+  <p class="section-sub">Every unit from the Learner's Book 8 contents page, mapped onto the school's actual term dates. This is the master plan; the twice‑weekly schedule below turns it into individual lesson slots.</p>
+
+  <div class="legend">
+    <span><span class="dot" style="background:var(--amber-500);"></span> Current unit</span>
+    <span><span class="badge badge-checkpoint">Checkpoint</span> "Check your progress" review point</span>
+    <span><span class="badge badge-trip">School event</span> Field trip / Earth Day tie‑in</span>
+    <span><span class="badge badge-holiday">Holiday</span> Public holiday inside the unit</span>
+  </div>
+
+  <div id="unit-list"></div>
+
+  <h2 class="section-title">Term calendar</h2>
+  <p class="section-sub">From the school's Academic Calendar 26/27 — the breaks and holidays already built into the schedule below.</p>
+  <div class="lesson-table-wrap" style="margin-bottom:10px;">
+    <table class="lessons">
+      <thead><tr><th>Term</th><th>Dates</th><th>School weeks</th><th>Breaks / holidays</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Term 1</strong></td><td>27 Jul – 2 Oct 2026</td><td>10</td><td>Mid‑term break 5–11 Oct. Public holidays 17 &amp; 25 Aug 2026.</td></tr>
+        <tr><td><strong>Term 2</strong></td><td>12 Oct – 11 Dec 2026</td><td>9</td><td>Winter break 14 Dec 2026 – 10 Jan 2027.</td></tr>
+        <tr><td><strong>Term 3</strong></td><td>11 Jan – 5 Mar 2027</td><td>8</td><td>Spring break 8–21 Mar 2027. Tetebatu field trip, first week.</td></tr>
+        <tr><td><strong>Term 4</strong></td><td>22 Mar – 18 Jun 2027</td><td>13</td><td>Summer break from 21 Jun. Public holidays 26 Mar, 6 May, 1 Jun 2027.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Twice‑weekly session schedule</h2>
+  <p class="section-sub">Every Tuesday and Friday from your first session (18 Aug 2026) to the end of the school year (18 Jun 2027), auto‑generated from the calendar above and tagged with whichever unit is live in class that day. Only the first four rows have materials attached so far — the rest show the unit they'll draw on when we plan them.</p>
+
+  <div class="lesson-table-wrap">
+    <table class="lessons" id="lesson-table">
+      <thead>
+        <tr><th>#</th><th>Date</th><th>Unit in class</th><th>Language focus that week</th><th>Status</th></tr>
+      </thead>
+      <tbody id="lesson-table-body">
+        <tr><td colspan="5" class="muted">Loading schedule…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="site-footer">
+    Built for a Cambridge Lower Secondary English 8 tutoring programme · Selong Bay School, Year 2026/27<br/>
+    Source documents: Unit Overview &amp; Year Planner (Learner's Book 8 contents page) · Academic Calendar 26/27
+  </footer>
+
+</div>
+
+<script>
+/* ================= Curriculum data ================= */
+
+const TERMS = [
+  {label:"Term 1", start:"2026-07-27", end:"2026-10-02"},
+  {label:"Term 2", start:"2026-10-12", end:"2026-12-11"},
+  {label:"Term 3", start:"2027-01-11", end:"2027-03-05"},
+  {label:"Term 4", start:"2027-03-22", end:"2027-06-18"},
+];
+
+const BREAKS = [
+  {label:"Mid-term break", start:"2026-10-05", end:"2026-10-11"},
+  {label:"Winter break", start:"2026-12-14", end:"2027-01-10"},
+  {label:"Spring break", start:"2027-03-08", end:"2027-03-21"},
+];
+
+const PUBLIC_HOLIDAYS = ["2026-08-17","2026-08-25","2027-03-26","2027-05-06","2027-06-01"];
+
+const UNITS = [
+  {n:1, title:"Nature and humans", page:8, start:"2026-07-27", end:"2026-08-21",
+    texts:"Fiction, travel writing, poetry — 'When the Mountains Roared'; Tu Fu poems; 'We're destroying our home'; tsunami account.",
+    writing:"Audio drama, informal writing, imaginative accounts. Pair discussion, script reading, poem aloud.",
+    language:"Verb tenses for effect; poetic form (enjambment, caesura); formal vs informal language.",
+    skills:"Critical thinking; communication.", tags:["holiday"], note:"Public holiday 17 Aug 2026 falls inside this unit."},
+  {n:2, title:"Grandmother's Song", page:20, start:"2026-08-24", end:"2026-09-18",
+    texts:"Short story (moral tale), poem — 'Grandmother's Song'; 'Jessie Emily Schofield'.",
+    writing:"Combining techniques, dialogue, biographical account. Pair/group discussion, unseen dialogue.",
+    language:"Punctuation for effect; dialogue in scripts; spelling strategies.",
+    skills:"Collaboration; creativity.", tags:["holiday"], note:"Public holiday 25 Aug 2026 falls inside this unit."},
+  {n:3, title:"Strange islands", page:38, start:"2026-09-21", end:"2026-10-16", split:true,
+    texts:"Non-fiction, pre-20th c. prose, drama — 'The Oak Island mystery'; Treasure Island; The Lost Isle of Tamarind.",
+    writing:"Monologue, play extract, character viewpoint. Pair/individual speaking, performing a play.",
+    language:"Sentence types for effect; clarity; choice of synonyms.",
+    skills:"Creativity; critical thinking.", tags:["checkpoint"],
+    note:"Part 1: 21 Sep – 2 Oct 2026. Mid‑term break 5–11 Oct. Completes 12–16 Oct 2026. Checkpoint: Check progress Units 1–2, end of Term 1."},
+  {n:4, title:"This is the modern world", page:64, start:"2026-10-19", end:"2026-11-13",
+    texts:"Non-fiction, argumentative texts — 'How the web was born'; 'Sir Tim Berners-Lee'; The Maze Runner.",
+    writing:"Article for older audience, persuasive speech, story submission. Pair/group discussion.",
+    language:"Emotive language; extended metaphors.",
+    skills:"Critical thinking; learning to learn.", tags:["checkpoint"], note:"Checkpoint: Check progress Units 3–4."},
+  {n:5, title:"Heroes", page:91, start:"2026-11-16", end:"2026-12-11",
+    texts:"Discursive/argumentative writing — 'Modern heroes'; 'The age of false heroes'; Chinese superhero feature.",
+    writing:"Counter-argument, character in a challenge, blog, film script. Script performance, debating.",
+    language:"Coordinating/subordinating conjunctions; imperatives &amp; modal verbs.",
+    skills:"Social responsibility; collaboration.", tags:[], note:"Skills feed directly into the Tetebatu field trip in January."},
+  {n:"Trip", title:"Tetebatu Field Trip & Report", start:"2027-01-11", end:"2027-01-15",
+    texts:"Applies Unit 1 (travel writing) and Unit 5 (interview / argument) skills already taught.",
+    writing:"Plan, take part in, and report on the field trip.",
+    language:"Register &amp; tense from Unit 1; interview language from Unit 5.",
+    skills:"—", tags:["trip"], note:"First week of Term 3."},
+  {n:6, title:"Monsters", page:120, start:"2027-01-18", end:"2027-02-19",
+    texts:"Non-fiction magazine article, pre-20th c. prose — 'The Hunt for Chupacabra'; 'The Selfish Giant'.",
+    writing:"Diary entries, monologues, personal account, report writing. Pair/group discussion, news report.",
+    language:"Adjectives for specific qualities; active/passive voice.",
+    skills:"Social responsibility; creativity.", tags:["checkpoint"], note:"Checkpoint: Check progress Units 5–6."},
+  {n:7, title:"The Plantation", page:148, start:"2027-02-22", end:"2027-03-26", split:true,
+    texts:"Short story (tragedy) — 'The Plantation'.",
+    writing:"Account writing, leaflet, fable, comparing poems. Pair/group discussion.",
+    language:"Emotive/critical language; extended metaphors.",
+    skills:"Critical thinking; learning to learn.", tags:["holiday"],
+    note:"Part 1: 22 Feb – 5 Mar 2027. Spring break 8–21 Mar. Completes 22–26 Mar (short week, 26 Mar holiday). End of Term 3."},
+  {n:8, title:"Choices and decisions", page:174, start:"2027-03-29", end:"2027-04-23",
+    texts:"Pre-20th c. drama, poetry — The Merchant of Venice; 'The Road Not Taken'; refugee-choices article.",
+    writing:"Drama scene, poem, personal response, writing an argument. Paired reading/performance.",
+    language:"Adverbs of manner, degree &amp; time; linking adverbs.",
+    skills:"Learning to learn; communication.", tags:["trip"], note:"22 Apr Earth Day lands mid-unit — its persuasive-writing task fits perfectly."},
+  {n:9, title:"Endings", page:200, start:"2027-04-26", end:"2027-05-21",
+    texts:"Personal writing, poetry, autobiography — 'Daughter Leaving Home'; When the Mountains Roared.",
+    writing:"Responding to feelings, script/trailer writing, debating. Pair/group/individual discussion.",
+    language:"Coordinating conjunctions; present participles.",
+    skills:"—", tags:["holiday","checkpoint"], note:"6 May holiday. Checkpoint: Check progress Units 7–9."},
+  {n:"Review", title:"Review, Portfolio & Trip Report", start:"2027-05-24", end:"2027-06-18",
+    texts:"Revisits favourite texts from the whole year.",
+    writing:"Compile portfolio; finalise Tetebatu report; revise for assessment.",
+    language:"Consolidates the year's language focus.",
+    skills:"—", tags:["holiday"], note:"1 Jun holiday. Last day of school year: 18 Jun 2027."},
+];
+
+// The only lessons with materials built so far.
+const READY_LESSONS = {
+  "2026-08-18": {
+    path: "lessons/lesson-01-2026-08-18/",
+    title: "Verb Tenses for Effect",
+    unitLabel: "Unit 1 · Nature and humans",
+    focus: "Using past simple, past continuous & past perfect to make a disaster narrative vivid and urgent.",
+  },
+  "2026-08-21": {
+    path: "lessons/lesson-02-2026-08-21/",
+    title: "Poetic Form: Enjambment & Caesura",
+    unitLabel: "Unit 1 · Nature and humans (wrap-up)",
+    focus: "Reading and writing nature poetry using line breaks and mid-line pauses for effect.",
+  },
+  "2026-08-25": {
+    path: "lessons/lesson-03-2026-08-25/",
+    title: "Punctuation for Effect in Dialogue",
+    unitLabel: "Unit 2 · Grandmother's Song",
+    focus: "Punctuating spoken dialogue correctly and using it to reveal character in a moral-tale short story.",
+  },
+  "2026-08-28": {
+    path: "lessons/lesson-04-2026-08-28/",
+    title: "Combining Descriptive Techniques",
+    unitLabel: "Unit 2 · Grandmother's Song",
+    focus: "Layering simile, sensory detail & spelling strategies into a short biographical character sketch.",
+  },
+};
+
+/* ================= Helpers ================= */
+
+function toDate(s){ return new Date(s + "T00:00:00"); }
+function isoDate(d){ return d.toISOString().slice(0,10); }
+function fmtLong(d){ return d.toLocaleDateString('en-GB',{weekday:'long', day:'2-digit', month:'long', year:'numeric'}); }
+function fmtShort(d){ return d.toLocaleDateString('en-GB',{weekday:'short', day:'2-digit', month:'short', year:'numeric'}); }
+function inRange(d,start,end){ return d >= toDate(start) && d <= toDate(end); }
+function findUnit(d){ return UNITS.find(u => inRange(d, u.start, u.end)) || null; }
+function findBreak(d){ return BREAKS.find(b => inRange(d, b.start, b.end)) || null; }
+function findTerm(d){ return TERMS.find(t => inRange(d, t.start, t.end)) || null; }
+
+/* ================= Render: unit outline ================= */
+
+const unitListEl = document.getElementById('unit-list');
+const today = toDate("2026-08-17");
+
+UNITS.forEach(u => {
+  const isCurrent = inRange(today, u.start, u.end);
+  const dateRange = fmtShort(toDate(u.start)).replace(/^\w+ /,'') + " – " + fmtShort(toDate(u.end)).replace(/^\w+ /,'');
+  const badges = (u.tags||[]).map(t => {
+    if (t==="checkpoint") return '<span class="badge badge-checkpoint">Checkpoint</span>';
+    if (t==="trip") return '<span class="badge badge-trip">School event</span>';
+    if (t==="holiday") return '<span class="badge badge-holiday">Holiday inside unit</span>';
+    return '';
+  }).join(' ');
+
+  const row = document.createElement('div');
+  row.className = 'unit-row';
+  row.innerHTML = `
+    <div class="unit-num">${typeof u.n === 'number' ? u.n : '—'}</div>
+    <div class="card unit-card ${isCurrent ? 'is-current' : ''}">
+      <div class="unit-head">
+        <div class="unit-title">${u.title}${u.page ? ` <span style="color:var(--ink-soft); font-weight:400; font-size:14px;">(p.${u.page})</span>` : ''}</div>
+        <div class="unit-dates">${dateRange} ${badges}</div>
+      </div>
+      <div class="unit-grid">
+        <div><div class="lbl">Texts &amp; reading</div><p>${u.texts}</p></div>
+        <div><div class="lbl">Writing &amp; speaking</div><p>${u.writing}</p></div>
+        <div><div class="lbl">Language focus</div><p>${u.language}</p></div>
+        <div><div class="lbl">21st-century skills</div><p>${u.skills}</p></div>
+      </div>
+      ${u.note ? `<div class="unit-note">${isCurrent ? '● Current unit — ' : ''}${u.note}</div>` : ''}
+    </div>
+  `;
+  unitListEl.appendChild(row);
+});
+
+/* ================= Render: focus cards for the 4 planned lessons ================= */
+
+const focusEl = document.getElementById('focus-cards');
+Object.entries(READY_LESSONS).forEach(([dateStr, lesson]) => {
+  const d = toDate(dateStr);
+  const card = document.createElement('div');
+  card.className = 'card lesson-card';
+  card.innerHTML = `
+    <div class="lc-date">${fmtShort(d)}</div>
+    <h3>${lesson.title}</h3>
+    <p class="focus">${lesson.unitLabel}</p>
+    <p class="focus">${lesson.focus}</p>
+    <div class="doc-links">
+      <a class="doc-link plan" href="${lesson.path}index.html">Plan</a>
+      <a class="doc-link worksheet" href="${lesson.path}worksheet.html">Worksheet</a>
+      <a class="doc-link slides" href="${lesson.path}slides.html">Slides</a>
+      <a class="doc-link script" href="${lesson.path}script.html">Script</a>
+    </div>
+  `;
+  focusEl.appendChild(card);
+});
+
+/* ================= Render: full session schedule ================= */
+
+const tbody = document.getElementById('lesson-table-body');
+tbody.innerHTML = '';
+
+let cur = toDate("2026-08-18");
+const endDate = toDate("2027-06-18");
+let sessionNum = 0;
+let lastTermLabel = null;
+let lastBreakLabel = null;
+
+while (cur <= endDate) {
+  const dow = cur.getDay(); // 2 = Tue, 5 = Fri
+  if (dow === 2 || dow === 5) {
+    const term = findTerm(cur);
+    const brk = findBreak(cur);
+
+    if (term && term.label !== lastTermLabel) {
+      const tr = document.createElement('tr');
+      tr.className = 'term-divider';
+      tr.innerHTML = `<td colspan="5">${term.label} · ${fmtShort(toDate(term.start))} – ${fmtShort(toDate(term.end))}</td>`;
+      tbody.appendChild(tr);
+      lastTermLabel = term.label;
+      lastBreakLabel = null;
+    }
+
+    if (brk) {
+      if (brk.label !== lastBreakLabel) {
+        const tr = document.createElement('tr');
+        tr.className = 'is-break';
+        tr.innerHTML = `<td colspan="5">— ${brk.label}: no sessions (${fmtShort(toDate(brk.start))} – ${fmtShort(toDate(brk.end))}) —</td>`;
+        tbody.appendChild(tr);
+        lastBreakLabel = brk.label;
+      }
+    } else {
+      sessionNum++;
+      lastBreakLabel = null;
+      const iso = isoDate(cur);
+      const unit = findUnit(cur);
+      const isHoliday = PUBLIC_HOLIDAYS.includes(iso);
+      const ready = READY_LESSONS[iso];
+
+      const tr = document.createElement('tr');
+      if (ready) tr.className = 'is-ready';
+      tr.innerHTML = `
+        <td>${sessionNum}</td>
+        <td>${fmtShort(cur)} ${isHoliday ? '<span class="badge badge-holiday">Holiday</span>' : ''}</td>
+        <td>${unit ? unit.title : '<span class="muted">—</span>'}</td>
+        <td>${unit ? unit.language : '<span class="muted">—</span>'}</td>
+        <td>${ready
+          ? `<span class="badge badge-ready">Ready</span> <a class="session-link" href="${ready.path}index.html">${ready.title}</a>`
+          : '<span class="badge badge-planned">Not yet planned</span>'}</td>
+      `;
+      tbody.appendChild(tr);
+    }
+  }
+  cur = new Date(cur.getTime() + 86400000);
+}
+
+document.getElementById('stat-sessions').querySelector('.num').textContent = sessionNum;
+</script>
+
+</body>
+</html>
