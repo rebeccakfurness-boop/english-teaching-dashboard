@@ -383,6 +383,7 @@ table.lessons .muted { color: var(--ink-soft); }
   border: 1px solid var(--line);
 }
 .doc-link.plan { background: var(--teal-100); color: var(--teal-900); }
+.doc-link.interactive { background: var(--rose-100); color: var(--rose-600); }
 .doc-link.worksheet { background: var(--amber-100); color: var(--amber-600); }
 .doc-link.slides { background: var(--plum-100); color: var(--plum-600); }
 .doc-link.script { background: var(--sage-100); color: var(--sage-600); }

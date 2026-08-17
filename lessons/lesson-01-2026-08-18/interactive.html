@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 — Verb Tenses for Effect</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --bg:#F5FAF8;
+  --ink:#0F2A3D;
+  --ink-soft:#4A6478;
+  --teal:#0E7C86;
+  --teal-dark:#0A5E66;
+  --teal-light:#D9EFE8;
+  --coral:#F2643B;
+  --coral-dark:#D14A22;
+  --coral-light:#FDE3DA;
+  --gold:#F0A93E;
+  --gold-dark:#C4811C;
+  --gold-light:#FCEFD1;
+  --card:#FFFFFF;
+  --line:#DCE8E4;
+  --shadow: 0 8px 24px rgba(15,42,61,0.08);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+/* ===== Shell ===== */
+.app{max-width:920px;margin:0 auto;padding:0 20px 40px;}
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(245,250,248,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom:1px solid var(--line);
+  padding:14px 20px 10px;
+}
+.topbar-inner{max-width:920px;margin:0 auto;}
+.brandrow{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+.brand{display:flex; align-items:center; gap:8px;}
+.brand-mark{
+  width:26px;height:26px;border-radius:8px;
+  background:linear-gradient(135deg,var(--teal),var(--coral));
+  flex-shrink:0;
+}
+.brand-text{font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); font-weight:600;}
+.eyebrow{
+  font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--coral-dark); font-weight:700;
+}
+.dots{display:flex; gap:6px; justify-content:center; flex-wrap:wrap;}
+.dot{
+  width:22px; height:5px; border-radius:3px; background:var(--line);
+  border:none; cursor:pointer; padding:0; transition:all .25s ease;
+}
+.dot.active{background:var(--teal); width:34px;}
+.dot.done{background:var(--gold);}
+
+/* ===== Stage ===== */
+.stage{padding-top:28px; min-height:62vh;}
+.step{display:none; animation:fadein .35s ease;}
+.step.active{display:block;}
+@keyframes fadein{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+.kicker{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--teal-dark); background:var(--teal-light);
+  padding:5px 12px; border-radius:20px; margin-bottom:14px;
+}
+h1.title{font-size:clamp(28px,5vw,42px); line-height:1.08; margin:0 0 12px; letter-spacing:-0.01em;}
+p.lede{font-size:17px; color:var(--ink-soft); max-width:640px; line-height:1.55; margin:0 0 24px;}
+
+/* ===== Cards & grids ===== */
+.grid{display:grid; gap:14px;}
+.grid-2{grid-template-columns:1fr 1fr;}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+@media(max-width:640px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:18px 20px; box-shadow:var(--shadow);
+}
+
+/* flip cards */
+.flip{perspective:1200px; height:168px; cursor:pointer;}
+.flip-inner{position:relative; width:100%; height:100%; transition:transform .5s cubic-bezier(.2,.8,.2,1); transform-style:preserve-3d;}
+.flip.flipped .flip-inner{transform:rotateY(180deg);}
+.flip-face{
+  position:absolute; inset:0; backface-visibility:hidden; border-radius:16px;
+  padding:16px 18px; display:flex; flex-direction:column; justify-content:center;
+  border:1px solid var(--line); box-shadow:var(--shadow);
+}
+.flip-front{background:var(--card);}
+.flip-back{transform:rotateY(180deg); background:var(--teal); color:#fff;}
+.flip-front .flip-term{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px; margin-bottom:4px;}
+.flip-front .flip-hint{font-size:12px; color:var(--ink-soft);}
+.flip-back p{margin:0; font-size:13.5px; line-height:1.45;}
+
+/* buttons */
+.btn{
+  font-family:'Inter',sans-serif; font-weight:600; font-size:14px;
+  border:none; border-radius:10px; padding:10px 18px; cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn:active{transform:translateY(0px);}
+.btn-primary{background:var(--teal); color:#fff;}
+.btn-primary:hover{box-shadow:0 6px 16px rgba(14,124,134,0.35);}
+.btn-coral{background:var(--coral); color:#fff;}
+.btn-coral:hover{box-shadow:0 6px 16px rgba(242,100,59,0.35);}
+.btn-ghost{background:transparent; color:var(--ink-soft); border:1px solid var(--line);}
+.btn-ghost:hover{border-color:var(--teal);}
+.btn:disabled{opacity:0.35; cursor:not-allowed; transform:none; box-shadow:none;}
+.btn-sm{padding:7px 12px; font-size:12.5px; border-radius:8px;}
+
+/* ===== Section: timeline (signature) ===== */
+.flow-wrap{
+  background:linear-gradient(180deg,#0F2A3D,#123B4E);
+  border-radius:22px; padding:34px 24px; color:#fff; position:relative; overflow:hidden;
+}
+.flow-svg{width:100%; height:auto; display:block;}
+.flow-label{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; fill:#fff;}
+.flow-sub{font-family:'Inter',sans-serif; font-size:10.5px; fill:rgba(255,255,255,0.75);}
+.flow-controls{display:flex; justify-content:center; gap:10px; margin-top:18px;}
+.tl-zone{opacity:.16; transition:opacity .35s ease;}
+.tl-zone.active{opacity:.42;}
+.tl-dot{opacity:0;}
+#timelineSvg.flowing .tl-dot{opacity:1; animation: tlMove 4.2s linear forwards;}
+@keyframes tlMove{ 0%{offset-distance:0%;} 100%{offset-distance:100%;} }
+
+/* example chips */
+.chiprow{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+.chip{
+  font-size:12.5px; font-weight:600; padding:7px 12px; border-radius:20px;
+  background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.18);
+}
+
+/* warm-up toggle */
+.toggle-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;}
+.toggle-btn{
+  font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px;
+  border:2px solid var(--line); background:#fff; border-radius:14px; padding:14px 22px; cursor:pointer;
+  color:var(--ink);
+}
+.toggle-btn.sel{border-color:var(--coral); background:var(--coral-light); color:var(--coral-dark);}
+.toggle-reveal{display:none; background:var(--gold-light); border-radius:14px; padding:14px 18px; font-size:14.5px; margin-top:4px;}
+.toggle-reveal.show{display:block;}
+
+/* sort activity */
+.sort-item{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:14px 16px; margin-bottom:10px; box-shadow:var(--shadow);
+}
+.sort-name{font-weight:600; font-size:14.5px; max-width:340px;}
+.sort-options{display:flex; gap:6px; flex-wrap:wrap;}
+.opt-btn{
+  font-size:12px; font-weight:700; border-radius:8px; border:1.5px solid var(--line);
+  background:#fff; padding:6px 10px; cursor:pointer; color:var(--ink-soft);
+}
+.opt-btn.correct{background:var(--teal); border-color:var(--teal); color:#fff;}
+.opt-btn.wrong{background:var(--coral-light); border-color:var(--coral); color:var(--coral-dark);}
+.sort-reason{font-size:12.5px; color:var(--ink-soft); margin-top:8px; display:none; width:100%;}
+.sort-item.answered .sort-reason{display:block;}
+
+/* comparison table */
+table.cmp{width:100%; border-collapse:collapse; margin:18px 0; border-radius:14px; overflow:hidden; box-shadow:var(--shadow);}
+table.cmp th, table.cmp td{padding:12px 14px; text-align:left; font-size:13.5px; border-bottom:1px solid var(--line);}
+table.cmp th{background:var(--ink); color:#fff; font-family:'Space Grotesk',sans-serif; font-size:12.5px;}
+table.cmp td{background:#fff;}
+table.cmp tr:last-child td{border-bottom:none;}
+table.cmp td.eg{font-family:'IBM Plex Mono',monospace; font-size:12.5px;}
+
+/* passage */
+.passage{
+  background:#fff; border-left:4px solid var(--teal); border-radius:0 14px 14px 0;
+  padding:16px 20px; font-family:'IBM Plex Mono',monospace; font-size:13.5px; line-height:1.8;
+  box-shadow:var(--shadow); margin-bottom:18px;
+}
+.passage b.ps{color:var(--teal-dark);}
+.passage b.pc{color:var(--gold-dark);}
+.passage b.pp{color:var(--coral-dark);}
+.legend-row{display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--ink-soft); margin-bottom:16px;}
+.legend-row span{display:inline-flex; align-items:center; gap:5px;}
+.legend-sw{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+/* why cards */
+.why-card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:12px; box-shadow:var(--shadow); cursor:pointer;}
+.why-top{display:flex; justify-content:space-between; align-items:center; gap:10px;}
+.why-text{font-size:14px; font-weight:500; font-family:'IBM Plex Mono',monospace;}
+.why-ans{display:none; margin-top:10px; font-size:13.5px; color:var(--teal-dark); background:var(--teal-light); padding:10px 12px; border-radius:10px;}
+.why-card.open .why-ans{display:block;}
+
+/* predict reveal */
+.predict-card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; margin-bottom:14px; box-shadow:var(--shadow);}
+.predict-scn{font-size:14.5px; font-weight:600; margin-bottom:10px;}
+.predict-reveal{display:none; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line);}
+.predict-card.open .predict-reveal{display:block;}
+.tag{display:inline-block; font-size:12px; font-weight:700; padding:4px 10px; border-radius:20px; margin-right:6px;}
+.tag-simple{background:var(--teal-light); color:var(--teal-dark);}
+.tag-continuous{background:var(--gold-light); color:var(--gold-dark);}
+.tag-perfect{background:var(--coral-light); color:var(--coral-dark);}
+
+/* sentence lab */
+.lab-slot{margin-bottom:18px;}
+.lab-slot-head{display:flex; align-items:center; gap:8px; margin-bottom:8px;}
+.lab-slot-num{
+  width:24px; height:24px; border-radius:50%; background:var(--ink); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;
+}
+.lab-slot-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14.5px;}
+.lab-opts{display:flex; flex-direction:column; gap:8px;}
+.lab-opt{
+  text-align:left; font-family:'IBM Plex Mono',monospace; font-size:13px; line-height:1.4;
+  border:1.5px solid var(--line); background:#fff; border-radius:10px; padding:10px 14px; cursor:pointer; color:var(--ink);
+}
+.lab-opt.sel{border-color:var(--teal); background:var(--teal-light);}
+.lab-preview{
+  background:var(--ink); color:#fff; border-radius:16px; padding:20px 22px; margin-top:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:14px; line-height:1.7; min-height:70px;
+}
+.lab-preview .ph{color:rgba(255,255,255,0.45); font-style:italic; font-family:'Inter',sans-serif;}
+
+/* quiz */
+.quiz-card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; margin-bottom:14px; box-shadow:var(--shadow);}
+.quiz-q{font-weight:600; font-size:14.5px; margin-bottom:10px;}
+.quiz-opts{display:flex; gap:8px; flex-wrap:wrap;}
+.quiz-fb{font-size:13px; margin-top:10px; display:none; padding:8px 10px; border-radius:8px;}
+.quiz-fb.correct{background:var(--teal-light); color:var(--teal-dark); display:block;}
+.quiz-fb.wrong{background:var(--coral-light); color:var(--coral-dark); display:block;}
+
+/* recap */
+.vocab-card{background:#fff; border-left:4px solid var(--teal); border-radius:10px; padding:12px 16px; margin-bottom:10px; box-shadow:var(--shadow);}
+.vocab-card b{font-family:'Space Grotesk',sans-serif;}
+.hw-list{list-style:none; padding:0; margin:0;}
+.hw-list li{padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.15); font-size:14.5px; display:flex; gap:10px; align-items:center;}
+.hw-list li:last-child{border-bottom:none;}
+.hw-box{width:16px; height:16px; border-radius:4px; border:2px solid var(--gold); flex-shrink:0;}
+.hw-link{display:inline-block; margin-top:18px; text-decoration:none;}
+
+/* nav footer */
+.navbar{
+  position:sticky; bottom:0; background:rgba(245,250,248,0.95); backdrop-filter:blur(8px);
+  border-top:1px solid var(--line); padding:14px 20px; display:flex; justify-content:space-between; align-items:center;
+  margin-top:26px; border-radius:16px 16px 0 0;
+}
+.step-count{font-size:12px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+
+.note{font-size:12.5px; color:var(--ink-soft); font-style:italic; margin-top:10px;}
+.backlink{display:inline-block; font-size:12px; color:var(--ink-soft); text-decoration:none; margin-bottom:6px;}
+.backlink:hover{color:var(--teal-dark);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brandrow">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div class="brand-text">Selong Bay School · Grade 8 English</div>
+      </div>
+      <div class="step-count mono"><span id="stepNow">1</span> / <span id="stepTotal">10</span></div>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+</div>
+
+<div class="app">
+<div class="stage">
+
+  <!-- STEP 0: WELCOME / WARM-UP -->
+  <section class="step active" data-step="0">
+    <a class="backlink" href="index.html">&larr; Lesson plan</a>
+    <span class="kicker">Lesson 1 · 30 minutes · Unit 1: Nature and humans</span>
+    <h1 class="title">Verb Tenses for Effect</h1>
+    <p class="lede">Writers choosing exactly which "past" to use, on purpose, to control how a story feels. First — a warm-up. Tap each card to reveal a strange nature fact.</p>
+    <div class="grid grid-2" id="warmupFlips"></div>
+    <p class="note">Ask him: which of these events would be scariest to actually live through — and why?</p>
+  </section>
+
+  <!-- STEP 1: THREE JOBS -->
+  <section class="step" data-step="1">
+    <span class="kicker">Big idea</span>
+    <h1 class="title">Every Past Tense Has a Job</h1>
+    <p class="lede">Three ways to talk about the past — and three completely different jobs they do in a story. Tap each to reveal.</p>
+    <div class="grid grid-3" id="jobFlips"></div>
+    <div class="chiprow" style="margin-top:4px;">
+      <div class="chip" style="background:var(--teal-light); color:var(--teal-dark); border-color:var(--teal-light);">⚡ Past Simple = speed</div>
+      <div class="chip" style="background:var(--gold-light); color:var(--gold-dark); border-color:var(--gold-light);">🎬 Past Continuous = scene</div>
+      <div class="chip" style="background:var(--coral-light); color:var(--coral-dark); border-color:var(--coral-light);">⏪ Past Perfect = backstory</div>
+    </div>
+  </section>
+
+  <!-- STEP 2: TIMELINE -->
+  <section class="step" data-step="2">
+    <span class="kicker">See it</span>
+    <h1 class="title">One Story, One Timeline</h1>
+    <p class="lede">All three tenses can live in the very same story — just at different points on the timeline. Press play.</p>
+    <div class="flow-wrap">
+      <svg class="flow-svg" viewBox="0 0 640 210" id="timelineSvg">
+        <rect class="tl-zone tl-zone-perfect" x="40" y="35" width="220" height="135" rx="14" fill="#F2643B"/>
+        <rect class="tl-zone tl-zone-continuous" x="260" y="35" width="170" height="135" rx="14" fill="#F0A93E"/>
+        <rect class="tl-zone tl-zone-simple" x="430" y="35" width="170" height="135" rx="14" fill="#0E7C86"/>
+
+        <line x1="260" y1="25" x2="260" y2="180" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="3 5"/>
+        <text x="260" y="18" text-anchor="middle" class="flow-sub">STORY'S "NOW" BEGINS</text>
+
+        <text x="150" y="65" text-anchor="middle" class="flow-label">PAST PERFECT</text>
+        <text x="150" y="82" text-anchor="middle" class="flow-sub">the past of the past</text>
+        <text x="150" y="145" text-anchor="middle" class="flow-sub mono">"had slept"</text>
+
+        <text x="345" y="65" text-anchor="middle" class="flow-label">PAST CONTINUOUS</text>
+        <text x="345" y="82" text-anchor="middle" class="flow-sub">already happening...</text>
+        <text x="345" y="145" text-anchor="middle" class="flow-sub mono">"was washing"</text>
+
+        <text x="515" y="65" text-anchor="middle" class="flow-label">PAST SIMPLE</text>
+        <text x="515" y="82" text-anchor="middle" class="flow-sub">then... then... then...</text>
+        <text x="515" y="145" text-anchor="middle" class="flow-sub mono">"began, fell, ran"</text>
+
+        <path id="tlPath" d="M60,150 L580,150" fill="none" stroke="none"/>
+        <circle class="tl-dot" r="7" fill="#fff" style="offset-path:path('M60,150 L580,150');"/>
+      </svg>
+      <div class="flow-controls">
+        <button class="btn btn-primary" id="timelineBtn">▶ Play the timeline</button>
+      </div>
+      <div class="chiprow">
+        <div class="chip">🔑 Backstory happens BEFORE "now" — everything else happens AT or AFTER it</div>
+      </div>
+    </div>
+    <p class="note">Ask him: if you removed the past perfect sentence completely, what would the reader lose?</p>
+  </section>
+
+  <!-- STEP 3: SORT ACTIVITY -->
+  <section class="step" data-step="3">
+    <span class="kicker">Practice · Label it</span>
+    <h1 class="title">Which Tense Is It?</h1>
+    <p class="lede">Read each sentence, then tap the tense you think it is.</p>
+    <div id="sortList"></div>
+  </section>
+
+  <!-- STEP 4: READING TOGETHER -->
+  <section class="step" data-step="4">
+    <span class="kicker">Reading · 4 min</span>
+    <h1 class="title">"The Night the Mountain Woke"</h1>
+    <p class="lede">An original passage written for this lesson, on the same theme as Unit 1's disaster narratives. Read it once for the story — then tap each "why?" card below.</p>
+    <div class="legend-row">
+      <span><span class="legend-sw" style="background:var(--coral);"></span>Past Perfect</span>
+      <span><span class="legend-sw" style="background:var(--gold);"></span>Past Continuous</span>
+      <span><span class="legend-sw" style="background:var(--teal);"></span>Past Simple</span>
+    </div>
+    <div class="passage">
+      For three hundred years, the volcano <b class="pp">had slept</b>. Farmers <b class="pp">had planted</b> their fields on its soft black soil; children <b class="pp">had grown up</b> believing the mountain was just a shape on the horizon, nothing more. Then, one warm evening in April, the ground <b class="ps">began</b> to hum.<br><br>
+      At first, Mei <b class="ps">thought</b> it was a truck passing on the road below. She <b class="pc">was washing</b> dishes when the plates <b class="ps">started</b> to rattle in the sink. Somewhere outside, a dog <b class="pc">was barking</b> wildly, over and over, as if it already knew.<br><br>
+      By midnight, the sky <b class="pp">had turned</b> the colour of rust. Ash <b class="ps">fell</b> like grey snow, and the whole village <b class="pc">was moving</b> — quietly, quickly — towards the coast road, carrying what they could and leaving everything else behind.
+    </div>
+    <div id="whyList"></div>
+  </section>
+
+  <!-- STEP 5: COMPARISON TABLE -->
+  <section class="step" data-step="5">
+    <span class="kicker">Sum it up</span>
+    <h1 class="title">Three Tenses, Side by Side</h1>
+    <table class="cmp">
+      <tr><th>Tense</th><th>Its job</th><th>Feels like</th><th>Example</th></tr>
+      <tr><td><b>Past Simple</b></td><td>Moves the story forward</td><td>Fast, urgent</td><td class="eg">"The ground shook."</td></tr>
+      <tr><td><b>Past Continuous</b></td><td>Sets a scene / gets interrupted</td><td>Slow, tense</td><td class="eg">"...was washing dishes when..."</td></tr>
+      <tr><td><b>Past Perfect</b></td><td>Gives backstory</td><td>Distant, explanatory</td><td class="eg">"...had slept for 300 years."</td></tr>
+    </table>
+    <p class="lede" style="margin-top:6px;">Notice: none of these is "better" — they're tools. A strong writer reaches for whichever one does the job they need <i>right now</i>.</p>
+  </section>
+
+  <!-- STEP 6: PREDICT THE EFFECT -->
+  <section class="step" data-step="6">
+    <span class="kicker">Activity · Choose the tool</span>
+    <h1 class="title">Which Tense Would You Reach For?</h1>
+    <p class="lede">For each goal, guess which tense fits best — then tap to reveal.</p>
+    <div id="predictList"></div>
+  </section>
+
+  <!-- STEP 7: SENTENCE LAB -->
+  <section class="step" data-step="7">
+    <span class="kicker">Build it · Sentence Lab</span>
+    <h1 class="title">Build Your Own Opening</h1>
+    <p class="lede">Pick one option from each row — backstory, scene, then event — and watch your mini-story assemble itself below.</p>
+    <div id="labSlots"></div>
+    <div class="lab-preview" id="labPreview"><span class="ph">Choose an option from each row above to build your opening...</span></div>
+  </section>
+
+  <!-- STEP 8: QUICK CHECK -->
+  <section class="step" data-step="8">
+    <span class="kicker">Quick check</span>
+    <h1 class="title">One More Round — Before Homework</h1>
+    <p class="lede">Four quick ones to make sure it's all clicked into place.</p>
+    <div id="quizList"></div>
+  </section>
+
+  <!-- STEP 9: RECAP + HOMEWORK -->
+  <section class="step" data-step="9">
+    <span class="kicker">Recap + homework</span>
+    <h1 class="title">Today's Key Words</h1>
+    <div id="vocabList"></div>
+    <div class="card" style="background:var(--ink); color:#fff; border:none; margin-top:22px;">
+      <div class="kicker" style="background:rgba(255,255,255,0.12); color:var(--gold);">🏠 Homework — Worksheet 1</div>
+      <ul class="hw-list">
+        <li><div class="hw-box"></div>Label the tense — 6 sentences</li>
+        <li><div class="hw-box"></div>Choose the tense that fits the effect</li>
+        <li><div class="hw-box"></div>Reading check: "The Night the Mountain Woke"</li>
+        <li><div class="hw-box"></div>Write your own disaster-narrative opening</li>
+        <li><div class="hw-box"></div>Self-check your tense choices</li>
+      </ul>
+      <a class="hw-link" href="worksheet.html"><button class="btn btn-coral">Open the homework worksheet →</button></a>
+    </div>
+    <p class="lede" style="margin-top:20px;">🎉 Past simple, past continuous, past perfect — all three, working together on purpose. Brilliant work! See you Friday for poetry.</p>
+  </section>
+
+</div>
+
+<div class="navbar">
+  <button class="btn btn-ghost" id="prevBtn">← Back</button>
+  <button class="btn btn-primary" id="nextBtn">Next →</button>
+</div>
+</div>
+
+<script>
+// ===== DATA =====
+const warmupData = [
+  {term:"🌋 Volcano", back:"Some volcanoes stay quiet for hundreds of years before erupting completely without warning."},
+  {term:"🌊 Tsunami", back:"A tsunami can cross an entire ocean in under a day, gathering speed as it travels."},
+  {term:"🌪️ Storm", back:"The word 'hurricane' comes from Huracán, a Mayan god believed to control wind and storms."},
+  {term:"🏔️ Earthquake", back:"Thousands of earthquakes happen every single day — most are far too small for humans to feel."}
+];
+
+const jobData = [
+  {term:"⚡ Past Simple", back:"Job: move the story forward, fast. One thing happens, then the next.\n\n\"The ground shook. The lights went out.\""},
+  {term:"🎬 Past Continuous", back:"Job: set the scene — something already happening, right before it's interrupted.\n\n\"She was washing dishes when the plates started to rattle.\""},
+  {term:"⏪ Past Perfect", back:"Job: give backstory — 'the past of the past'.\n\n\"For three hundred years, the volcano had slept.\""}
+];
+
+const sortData = [
+  {name:"The wind had been growing stronger for hours before the first tree fell.", correct:"Past Perfect", reason:"'had been growing' happened before the main story moment — the tree falling."},
+  {name:"She was carrying the last box to the car when the power cut out.", correct:"Past Continuous", reason:"'was carrying' was already in progress when the power cut interrupted it."},
+  {name:"The river burst its banks just after midnight.", correct:"Past Simple", reason:"One clear event, moving the story straight forward."},
+  {name:"By the time the rescue boats arrived, the water had already reached the rooftops.", correct:"Past Perfect", reason:"'had already reached' happened before the boats arrived — backstory to that moment."},
+  {name:"Birds were circling above the valley all afternoon.", correct:"Past Continuous", reason:"An action stretched out over time, setting the scene rather than moving the plot."},
+  {name:"Nobody had warned the village that the dam was weak.", correct:"Past Perfect", reason:"The (missing) warning happened earlier than the story's main events."}
+];
+const sortOptions = ["Past Simple","Past Continuous","Past Perfect"];
+
+const whyData = [
+  {text:'"For three hundred years, the volcano had slept." — why open with past perfect?', ans:"It's backstory: telling us the danger has been building for centuries makes it feel far more shocking when it finally breaks."},
+  {text:'"She was washing dishes when the plates started to rattle." — why past continuous here?', ans:"It puts us inside an ordinary moment right before it's interrupted — the calm makes the interruption land harder."},
+  {text:'"By midnight, the sky had turned the colour of rust." — why past perfect, not past simple?', ans:"It shows the change happened gradually and was already complete by the time the story catches up to midnight."},
+  {text:'"Ash fell like grey snow, and the whole village was moving..." — why mix tenses at the end?', ans:"Short past-simple bursts speed the action up, while 'was moving' stretches out the image of the whole village in motion — like a wide camera shot."}
+];
+
+const predictData = [
+  {scn:"You want to describe a calm, ordinary moment right before something goes wrong.", best:"continuous", label:"Past Continuous", exp:"It stretches the moment out, putting the reader inside it just before the interruption lands."},
+  {scn:"You want a fast, dramatic sequence of events, one after another.", best:"simple", label:"Past Simple", exp:"Short past-simple sentences read quickly, mirroring the speed of the action itself."},
+  {scn:"You want to explain something that happened long before your story starts — without stopping to write a whole flashback scene.", best:"perfect", label:"Past Perfect", exp:"Past perfect delivers backstory in a single phrase: 'the past of the past.'"},
+  {scn:"You're writing the very first line of your story, starting the main timeline.", best:"simple", label:"Past Simple", exp:"Past simple signals 'this is where the story's clock starts ticking.'"}
+];
+
+const labData = {
+  backstory: [
+    {t:"PAST PERFECT", text:"For three hundred years, the volcano had slept."},
+    {t:"PAST PERFECT", text:"No one had ever seen the river rise this high before."},
+    {t:"PAST PERFECT", text:"The old dam had cracked years earlier, but nobody had fixed it."}
+  ],
+  scene: [
+    {t:"PAST CONTINUOUS", text:"She was washing the dishes when the plates began to rattle."},
+    {t:"PAST CONTINUOUS", text:"The farmers were loading their trucks, joking about the weather."},
+    {t:"PAST CONTINUOUS", text:"A dog was barking wildly at nothing anyone could see."}
+  ],
+  event: [
+    {t:"PAST SIMPLE", text:"The ground shook, the lights went out, and people ran."},
+    {t:"PAST SIMPLE", text:"Ash fell like grey snow across the rooftops."},
+    {t:"PAST SIMPLE", text:"The river burst its banks and raced through the streets."}
+  ]
+};
+
+const quizData = [
+  {q:'"The wind had already died down by the time we woke up." What job is this sentence doing?', opts:["Moving the plot forward","Giving backstory","Setting a scene to be interrupted"], correct:1, fb:"Right — 'had already died down' happened before 'we woke up', so it's backstory: past perfect."},
+  {q:"You're writing a fast, exciting sequence of events. Which tense should dominate?", opts:["Past Continuous","Past Perfect","Past Simple"], correct:2, fb:"Yes — short past-simple sentences move quickly, one action after another."},
+  {q:'"He was climbing the ladder when the wind changed." Which words signal past continuous?', opts:["was climbing","changed","the wind"], correct:0, fb:"Correct — 'was' + '-ing' shows the action was already in progress."},
+  {q:"True or false: strong writers should only ever use ONE tense in a piece of narrative writing.", opts:["True","False"], correct:1, fb:"False! Skilled writers deliberately mix all three tenses to control pace, atmosphere and backstory."}
+];
+
+const vocabData = [
+  {t:"Past Simple", d:"One completed action in the past. Moves the story forward, fast."},
+  {t:"Past Continuous", d:"'was/were' + '-ing'. An action already in progress, often interrupted."},
+  {t:"Past Perfect", d:"'had' + past participle. The 'past of the past' — backstory before the story's 'now'."},
+  {t:"Tense for Effect", d:"Choosing a tense on purpose, because of the feeling it creates — not by accident."}
+];
+
+// ===== BUILD STEP 0: WARM-UP FLIPS =====
+const warmupWrap = document.getElementById('warmupFlips');
+warmupData.forEach(item=>{
+  const el = document.createElement('div');
+  el.className = 'flip';
+  el.innerHTML = `<div class="flip-inner">
+    <div class="flip-face flip-front"><div class="flip-term">${item.term}</div><div class="flip-hint">Tap to reveal ↻</div></div>
+    <div class="flip-face flip-back"><p>${item.back}</p></div>
+  </div>`;
+  el.onclick = ()=> el.classList.toggle('flipped');
+  warmupWrap.appendChild(el);
+});
+
+// ===== STEP 1: job flips =====
+const jobWrap = document.getElementById('jobFlips');
+const jobColors = ['var(--teal)','var(--gold-dark)','var(--coral)'];
+jobData.forEach((item,i)=>{
+  const el = document.createElement('div');
+  el.className = 'flip';
+  el.innerHTML = `<div class="flip-inner">
+    <div class="flip-face flip-front"><div class="flip-term">${item.term}</div><div class="flip-hint">Tap for the job ↻</div></div>
+    <div class="flip-face flip-back" style="background:${jobColors[i]};"><p style="white-space:pre-line;">${item.back}</p></div>
+  </div>`;
+  el.onclick = ()=> el.classList.toggle('flipped');
+  jobWrap.appendChild(el);
+});
+
+// ===== STEP 2: timeline =====
+const timelineSvg = document.getElementById('timelineSvg');
+const tlZones = [
+  document.querySelector('.tl-zone-perfect'),
+  document.querySelector('.tl-zone-continuous'),
+  document.querySelector('.tl-zone-simple')
+];
+document.getElementById('timelineBtn').onclick = function(){
+  timelineSvg.classList.remove('flowing');
+  tlZones.forEach(z=>z.classList.remove('active'));
+  void timelineSvg.offsetWidth;
+  timelineSvg.classList.add('flowing');
+  this.textContent = '↻ Replay the timeline';
+  setTimeout(()=>tlZones[0].classList.add('active'), 30);
+  setTimeout(()=>{tlZones[0].classList.remove('active'); tlZones[1].classList.add('active');}, 1500);
+  setTimeout(()=>{tlZones[1].classList.remove('active'); tlZones[2].classList.add('active');}, 2900);
+  setTimeout(()=>{tlZones[2].classList.remove('active');}, 4300);
+};
+
+// ===== STEP 3: sort activity =====
+const sortWrap = document.getElementById('sortList');
+sortData.forEach(item=>{
+  const row = document.createElement('div');
+  row.className = 'sort-item';
+  const optsHtml = sortOptions.map(o=>`<button class="opt-btn" data-val="${o}">${o}</button>`).join('');
+  row.innerHTML = `<div style="flex:1;"><div class="sort-name">${item.name}</div><div class="sort-reason">${item.reason}</div></div><div class="sort-options">${optsHtml}</div>`;
+  row.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.onclick = ()=>{
+      if(row.classList.contains('answered')) return;
+      row.classList.add('answered');
+      row.querySelectorAll('.opt-btn').forEach(b=>{
+        if(b.dataset.val === item.correct) b.classList.add('correct');
+        else if(b === btn) b.classList.add('wrong');
+      });
+    };
+  });
+  sortWrap.appendChild(row);
+});
+
+// ===== STEP 4: why cards =====
+const whyWrap = document.getElementById('whyList');
+whyData.forEach(item=>{
+  const el = document.createElement('div');
+  el.className = 'why-card';
+  el.innerHTML = `<div class="why-top"><div class="why-text">${item.text}</div><button class="btn btn-sm btn-ghost">WHY?</button></div><div class="why-ans">${item.ans}</div>`;
+  el.onclick = ()=> el.classList.toggle('open');
+  whyWrap.appendChild(el);
+});
+
+// ===== STEP 6: predict =====
+const predictWrap = document.getElementById('predictList');
+const tagClassMap = {simple:'tag-simple', continuous:'tag-continuous', perfect:'tag-perfect'};
+predictData.forEach(item=>{
+  const el = document.createElement('div');
+  el.className = 'predict-card';
+  el.innerHTML = `<div class="predict-scn">${item.scn}</div>
+    <button class="btn btn-sm btn-coral reveal-btn">Reveal answer</button>
+    <div class="predict-reveal">
+      <span class="tag ${tagClassMap[item.best]}">${item.label}</span>
+      <p style="font-size:13.5px; color:var(--ink-soft); margin-top:8px;">${item.exp}</p>
+    </div>`;
+  el.querySelector('.reveal-btn').onclick = ()=> el.classList.toggle('open');
+  predictWrap.appendChild(el);
+});
+
+// ===== STEP 7: sentence lab =====
+const labSlotsWrap = document.getElementById('labSlots');
+const labPreview = document.getElementById('labPreview');
+const labState = {backstory:null, scene:null, event:null};
+const labMeta = {
+  backstory:{num:1, title:'Backstory — Past Perfect'},
+  scene:{num:2, title:'Scene — Past Continuous'},
+  event:{num:3, title:'Event — Past Simple'}
+};
+Object.keys(labData).forEach(key=>{
+  const slot = document.createElement('div');
+  slot.className = 'lab-slot';
+  const optsHtml = labData[key].map((o,i)=>`<button class="lab-opt" data-key="${key}" data-i="${i}">${o.text}</button>`).join('');
+  slot.innerHTML = `<div class="lab-slot-head"><div class="lab-slot-num">${labMeta[key].num}</div><div class="lab-slot-title">${labMeta[key].title}</div></div><div class="lab-opts">${optsHtml}</div>`;
+  slot.querySelectorAll('.lab-opt').forEach(btn=>{
+    btn.onclick = ()=>{
+      slot.querySelectorAll('.lab-opt').forEach(b=>b.classList.remove('sel'));
+      btn.classList.add('sel');
+      labState[key] = Number(btn.dataset.i);
+      renderLabPreview();
+    };
+  });
+  labSlotsWrap.appendChild(slot);
+});
+function renderLabPreview(){
+  const parts = [];
+  ['backstory','scene','event'].forEach(key=>{
+    if(labState[key] !== null) parts.push(labData[key][labState[key]].text);
+  });
+  labPreview.innerHTML = parts.length ? parts.join(' ') : '<span class="ph">Choose an option from each row above to build your opening...</span>';
+}
+
+// ===== STEP 8: quiz =====
+const quizWrap = document.getElementById('quizList');
+quizData.forEach(item=>{
+  const el = document.createElement('div');
+  el.className = 'quiz-card';
+  const optsHtml = item.opts.map((o,i)=>`<button class="btn btn-sm btn-ghost" data-i="${i}">${o}</button>`).join('');
+  el.innerHTML = `<div class="quiz-q">${item.q}</div><div class="quiz-opts">${optsHtml}</div><div class="quiz-fb"></div>`;
+  const fb = el.querySelector('.quiz-fb');
+  el.querySelectorAll('.quiz-opts button').forEach(btn=>{
+    btn.onclick = ()=>{
+      if(fb.classList.contains('correct')) return;
+      const ok = Number(btn.dataset.i) === item.correct;
+      fb.textContent = (ok ? '✓ ' : '✗ Not quite — ') + item.fb;
+      fb.className = 'quiz-fb ' + (ok ? 'correct' : 'wrong');
+      if(ok){ btn.style.background='var(--teal)'; btn.style.color='#fff'; }
+    };
+  });
+  quizWrap.appendChild(el);
+});
+
+// ===== STEP 9: vocab =====
+const vocabWrap = document.getElementById('vocabList');
+vocabData.forEach(item=>{
+  const el = document.createElement('div');
+  el.className = 'vocab-card';
+  el.innerHTML = `<b>${item.t}:</b> ${item.d}`;
+  vocabWrap.appendChild(el);
+});
+
+// ===== STEPPER NAV =====
+const steps = document.querySelectorAll('.step');
+const dotsWrap = document.getElementById('dots');
+let current = 0;
+steps.forEach((s,i)=>{
+  const d = document.createElement('button');
+  d.className = 'dot' + (i===0?' active':'');
+  d.onclick = ()=> goTo(i);
+  dotsWrap.appendChild(d);
+});
+document.getElementById('stepTotal').textContent = steps.length;
+
+function goTo(i){
+  if(i<0 || i>=steps.length) return;
+  steps[current].classList.remove('active');
+  dotsWrap.children[current].classList.remove('active');
+  if(i>current) dotsWrap.children[current].classList.add('done');
+  current = i;
+  steps[current].classList.add('active');
+  Array.from(dotsWrap.children).forEach((d,idx)=>{
+    d.classList.toggle('active', idx===current);
+  });
+  document.getElementById('stepNow').textContent = current+1;
+  document.getElementById('prevBtn').disabled = current===0;
+  document.getElementById('nextBtn').textContent = current===steps.length-1 ? 'Finish 🎉' : 'Next →';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.getElementById('prevBtn').onclick = ()=> goTo(current-1);
+document.getElementById('nextBtn').onclick = ()=> { if(current<steps.length-1) goTo(current+1); };
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='ArrowRight') goTo(current+1);
+  if(e.key==='ArrowLeft') goTo(current-1);
+});
+goTo(0);
+</script>
+</body>
+</html>

@@ -181,6 +181,7 @@ const READY_LESSONS = {
     title: "Verb Tenses for Effect",
     unitLabel: "Unit 1 · Nature and humans",
     focus: "Using past simple, past continuous & past perfect to make a disaster narrative vivid and urgent.",
+    interactive: true,
   },
   "2026-08-21": {
     path: "lessons/lesson-02-2026-08-21/",
@@ -263,6 +264,7 @@ Object.entries(READY_LESSONS).forEach(([dateStr, lesson]) => {
     <p class="focus">${lesson.focus}</p>
     <div class="doc-links">
       <a class="doc-link plan" href="${lesson.path}index.html">Plan</a>
+      ${lesson.interactive ? `<a class="doc-link interactive" href="${lesson.path}interactive.html">🕹️ Interactive</a>` : ''}
       <a class="doc-link worksheet" href="${lesson.path}worksheet.html">Worksheet</a>
       <a class="doc-link slides" href="${lesson.path}slides.html">Slides</a>
       <a class="doc-link script" href="${lesson.path}script.html">Script</a>
